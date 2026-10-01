@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Employee Attrition Intelligence</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Employee Attrition Intelligence</h1>
+    <p>HR Analytics & Machine Learning Dashboard</p>
+  </div>
+  <span class="badge">DATA SCIENCE</span>
+</header>
+
+<main>
+<section class="cards">
+  <div class="card"><span>Total Employees</span><strong>{{ stats.employees }}</strong></div>
+  <div class="card"><span>Attrition Cases</span><strong>{{ stats.attrition }}</strong></div>
+  <div class="card"><span>Attrition Rate</span><strong>{{ stats.rate }}%</strong></div>
+  <div class="card"><span>Avg. Monthly Income</span><strong>₹{{ stats.income }}</strong></div>
+</section>
+
+<section class="panel">
+<h2>Predict Employee Attrition</h2>
+<p class="muted">Enter employee information to estimate attrition risk.</p>
+<form method="POST" action="/predict" class="grid">
+  <label>Age<input name="Age" type="number" min="18" max="70" value="30" required></label>
+  <label>Gender<select name="Gender"><option>Male</option><option>Female</option></select></label>
+  <label>Department<select name="Department"><option>Sales</option><option>Research & Development</option><option>Human Resources</option><option>Finance</option><option>IT</option><option>Marketing</option></select></label>
+  <label>Job Role<select name="JobRole"><option>Sales Executive</option><option>Research Scientist</option><option>Laboratory Technician</option><option>Manager</option><option>Healthcare Representative</option><option>Human Resources</option><option>Developer</option><option>Data Analyst</option><option>Marketing Specialist</option></select></label>
+  <label>Education<select name="Education"><option>High School</option><option>Bachelor's</option><option>Master's</option><option>PhD</option></select></label>
+  <label>Marital Status<select name="MaritalStatus"><option>Single</option><option>Married</option><option>Divorced</option></select></label>
+  <label>Monthly Income<input name="MonthlyIncome" type="number" value="5000" required></label>
+  <label>Job Level<input name="JobLevel" type="number" min="1" max="5" value="2" required></label>
+  <label>Years at Company<input name="YearsAtCompany" type="number" min="0" max="40" value="3" required></label>
+  <label>Total Working Years<input name="TotalWorkingYears" type="number" min="0" max="50" value="7" required></label>
+  <label>Job Satisfaction<select name="JobSatisfaction"><option>1</option><option>2</option><option>3</option><option selected>4</option></select></label>
+  <label>Environment Satisfaction<select name="EnvironmentSatisfaction"><option>1</option><option>2</option><option>3</option><option selected>4</option></select></label>
+  <label>Work-Life Balance<select name="WorkLifeBalance"><option>1</option><option>2</option><option>3</option><option selected>4</option></select></label>
+  <label>OverTime<select name="OverTime"><option>No</option><option>Yes</option></select></label>
+  <label>Distance From Home<input name="DistanceFromHome" type="number" value="8" required></label>
+  <label>Years Since Last Promotion<input name="YearsSinceLastPromotion" type="number" value="1" required></label>
+  <label>Training Times Last Year<input name="TrainingTimesLastYear" type="number" value="3" required></label>
+  <label>Performance Rating<select name="PerformanceRating"><option>1</option><option>2</option><option selected>3</option><option>4</option></select></label>
+  <label>Stock Option Level<select name="StockOptionLevel"><option>0</option><option>1</option><option>2</option><option>3</option></select></label>
+  <label>Companies Worked<input name="NumCompaniesWorked" type="number" value="2" required></label>
+  <label>Business Travel<select name="BusinessTravel"><option>Non-Travel</option><option>Rarely</option><option>Frequently</option></select></label>
+  <button type="submit">Predict Attrition Risk</button>
+</form>
+
+{% if prediction %}
+<div class="result">{{ prediction }}</div>
+{% endif %}
+</section>
+
+<footer>Portfolio project • Synthetic HR dataset • Use predictions as analytical estimates, not automated employment decisions.</footer>
+</main>
+</body>
+</html>
